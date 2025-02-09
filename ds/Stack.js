@@ -27,6 +27,7 @@ class Stack {
 
     pop() {
         if (this.isEmpty()) return undefined;
+        if (this.first === this.last) this.last = null;
         let temp = this.first;
         this.first = this.first.next;
         this.length--;
