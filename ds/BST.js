@@ -39,9 +39,49 @@ class BinarySearchTree {
     }
 
     get(val) {
+        let current = this.root;
+
+        while(current) {
+            if(val < current.val) {
+                current = current.left;
+            } else if (val > current.val) {
+                current = current.right;
+            } else {
+                return current;
+            }
+        }
+
+        return null;
     }
 
-    remove(val) {        
+    remove(val) {
+        if(val === this.root.val) {
+            let node = this.root;
+            this.root = null;
+            return node;
+        }
+        
+        let current = this.root;
+        let parent = null;
+        while(current) {
+            if(val < current.val) {
+                parent = current;
+                current = current.left;
+            } else if(val > current.val) {
+                parent = current;
+                current = current.right;
+            } else {
+                if(val < parent.val) {
+                    parent.left = null
+                    return current;
+                } else if(val > parent.val) {
+                    parent.right = null;
+                    return current;
+                }
+            }
+        }
+
+        return null;
     }
 
     BFS() {
@@ -112,7 +152,9 @@ bst.insert(8);
 bst.insert(15);
 bst.insert(20);
 
-console.log("BFS", bst.BFS());
-console.log("DFS Pre Order", bst.DFSPreOrder());
-console.log("DFS Post Order", bst.DFSPostOrder());
-console.log("DFS In Order", bst.DFSInOrder());
+// console.log("Get", bst.get(18));
+console.log("Remove", bst.remove(8));
+// console.log("BFS", bst.BFS());
+// console.log("DFS Pre Order", bst.DFSPreOrder());
+// console.log("DFS Post Order", bst.DFSPostOrder());
+// console.log("DFS In Order", bst.DFSInOrder());
